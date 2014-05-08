@@ -42,7 +42,6 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.10.0)
-    mysql (2.9.1)
     polyglot (0.3.4)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -82,5 +81,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  mysql
   voip_api!
