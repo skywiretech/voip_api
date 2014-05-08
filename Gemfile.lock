@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     voip_api (0.0.1)
+      hashie (~> 2.1.1)
       rails (= 4.0.2)
       savon (~> 2.3.0)
 
@@ -41,6 +42,7 @@ GEM
     erubis (2.7.0)
     gyoku (1.1.1)
       builder (>= 2.1.2)
+    hashie (2.1.1)
     hike (1.2.3)
     httpi (2.1.0)
       rack

@@ -1,23 +1,3 @@
-# These are the attributes as the VOIP Innovations API defines them:
-# tn
-# availability
-# expireDate
-# endpoint
-# rewrite
-# status
-# statusCode
-# refId
-# cnam
-# tier
-# t38
-# cnamName
-# cnamStorageActive
-# cnamStorageAvailability
-# registered911
-# registered411
-# failover
-# forward
-
 module VoipApi
 
   class DID
@@ -25,6 +5,12 @@ module VoipApi
       :ref_id, :cnam, :tier, :t_38, :cnam_name, :cnam_storage_active, :cnam_storage_availability,
       :registered_911, :registered_411, :failover, :forward
 
+    def initialize(hashie_params={})
+      # Setup all our attributes if we respond to it.
+      hashie_params.each do |k, v|
+        instance_variable_set("@#{k}", v) unless v.nil?
+      end
+    end
 
     # And what can you do...?
     def self.sandbox_operations
