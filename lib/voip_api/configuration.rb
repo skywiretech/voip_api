@@ -2,12 +2,16 @@ module VoipApi
   module Configuration
 
     # Where Voip Innovations has their latest WSDL definition
-    DEFAULT_WSDL_ENDPOINT = "http://dev.voipinnovations.com/VOIP/Services/APIService.asmx?wsdl".freeze
+    DEFAULT_WSDL = "http://dev.voipinnovations.com/VOIP/Services/APIService.asmx?wsdl".freeze
 
+    # The default namespace
     DEFAULT_NAMESPACE = "http://tempuri.org/"
 
+    # Default keys to filter out from Savon data
+    DEFAULT_FILTERS = [:password, :secret]
+
     # The valid keys for creating a new API class
-    VALID_OPTIONS = [:login, :password, :namespace, :wsdl_endpoint].freeze
+    VALID_OPTIONS = [:login, :secret, :namespace, :wsdl, :filters].freeze
 
     # @private
     attr_accessor *VALID_OPTIONS
@@ -28,8 +32,9 @@ module VoipApi
     end
 
     def reset
-      self.wsdl_endpoint = DEFAULT_WSDL_ENDPOINT
-      self.namespace     = DEFAULT_NAMESPACE
+      self.wsdl      = DEFAULT_WSDL
+      self.namespace = DEFAULT_NAMESPACE
+      self.filters   = DEFAULT_FILTERS
     end
     
   end

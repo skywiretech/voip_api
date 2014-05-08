@@ -1,6 +1,10 @@
+require File.expand_path('../request', __FILE__)
+
 module VoipApi
 
   class API
+    include Request
+    
     attr_accessor *Configuration::VALID_OPTIONS
 
     # Creates a new API
