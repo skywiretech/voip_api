@@ -19,6 +19,10 @@ module VoipApi
         expected = {login: nil, password: nil, namespace: "http://tempuri.org/", wsdl_endpoint: "http://dev.voipinnovations.com/VOIP/Services/APIService.asmx?wsdl"}
         VoipApi.options.should eq(expected)
       end
+
+      it "should be able to create a new client" do
+        VoipApi.client.should be_a(Client)
+      end
     end
   end
 end
