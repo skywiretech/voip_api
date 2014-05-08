@@ -3,7 +3,7 @@ module VoipApi
   class Client
 
     module Account
-      def account(params ={})
+      def account(params={})
         # Make it do account related things here
       end
     end
