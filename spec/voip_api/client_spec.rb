@@ -22,9 +22,5 @@ module VoipApi
         client.filters.should eq(VoipApi::Configuration::DEFAULT_FILTERS)
       end
     end
-
-    describe "concerning creating requests" do
-      pending "it can create requests"
-    end
   end
 end
