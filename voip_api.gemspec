@@ -11,7 +11,8 @@ Gem::Specification.new do |s|
   s.email       = ["mark.d.holmberg@gmail.com"]
   s.homepage    = "http://www.markholmberg.com"
   s.summary     = "VOIP API is a Ruby gem for communicating with the VOIP Innovations API."
-  s.description     = "VOIP API is a Ruby gem for communicating with the VOIP Innovations API."
+  s.description = "VOIP API is a Ruby gem for communicating with the VOIP Innovations API using their SOAP format and converting it to a RESTful style."
+  s.license     = 'MIT'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
