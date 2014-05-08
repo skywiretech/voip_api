@@ -9,9 +9,12 @@ module VoipApi
         globals.wsdl @wsdl
         globals.namespace @namespace
         globals.filters @filters
+        globals.pretty_print_xml true
+        globals.namespace_identifier :tns
+        globals.strip_namespaces true
       end
 
-      # Call client.call(:whatever) here
+      # Invoke the call to the API
       response = client.call(api_method, message: params)
 
       # TODO: make a response object here
