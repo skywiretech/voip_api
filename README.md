@@ -34,8 +34,8 @@ irb
 
 ```ruby
 require 'voip_api'
-api_client = VoipApi.client
+api_account = VoipApi.account
 
 # Make a request
-api_client.request(web_method, params={})
+api_account.request(web_method, params={})
 ```

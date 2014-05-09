@@ -30,8 +30,8 @@ module VoipApi
         VoipApi.options.should eq(expected)
       end
 
-      it "should be able to create a new client" do
-        VoipApi.client.should be_a(Client)
+      it "should be able to create a new account" do
+        VoipApi.account.should be_a(Account)
       end
     end
   end
