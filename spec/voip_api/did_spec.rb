@@ -2,36 +2,36 @@ require 'spec_helper'
 
 module VoipApi
   describe DID do
-    describe "concerning creating a new DID instance" do
-      let(:did) { DID.new }
-
-      it "should know the sandbox operations" do
-        DID.sandbox_operations.should match_array([:audit_di_ds, :assign_did, :config_did, :query_did, :release_did, :reserve_did])
-      end
-
-      it "should know the production operations" do
-        DID.production_operations.should match_array([:audit_di_ds, :assign_did, :config_did, :query_did, :release_did, :reserve_did, :get_did_forward])
-      end
-
-      it "should return the soap_action used to invoke the API request for now" do
-        DID.production_operations.each do |action|
-          if action == :audit_di_ds
-            did.send(:audit_dids).should eq(action)
-          else
-            did.send(action).should eq(action)
-          end
-        end
-      end
-    end
-
+    
     describe "concerning converting stuff from VOIP api casing to our standard camelcasing" do
-      it "should be able to create a new DID with their jacked up keys" do
+      it "can give you a description of an attribute" do
+        DID.description(:tn).should eq("Telephone number")
+        DID.description(:availability).should eq("Defines the status of the returned TN")
+        DID.description(:expire_date).should eq("Date which this TN will be released if currently reserved")
+        DID.description(:endpoint).should eq("This will return an integer that defines which endpoint group this TN will route to if the TN is assigned to you or reserved by you. This can be changed by performing a configDID request")
+        DID.description(:rewrite).should eq("Used in rewriting the DNIS for the TN if assigned to you or reserved by you.")
+        DID.description(:status).should eq("This describes the status code for easy display")
+        DID.description(:status_code).should eq("This code defines the status of the DID")
+        DID.description(:ref_id).should eq("This is the customer-defined Reference ID that is associated with this request. This field is purely for the benefit of the API user, and could potentially be used to associate a Customer ID, Order ID, or any other Reference ID to an API request")
+        DID.description(:cnam).should eq("Denotes whether calling name inbound is true or false")
+        DID.description(:tier).should eq("Tier in which the number resides")
+        DID.description(:t_38).should eq("Denotes whether T38 is true or false")
+        DID.description(:cnam_name).should eq("CNAM Storage Display Name")
+        DID.description(:cnam_storage_active).should eq("Denotes whether CNAM storage is active or inactive")
+        DID.description(:cnam_storage_availability).should eq("Denotes whether CNAM storage availability is true or false")
+        DID.description(:registered_911).should eq("Denotes whether E911 is true or false")
+        DID.description(:registered_411).should eq("Denotes whether E411 is true or false")
+        DID.description(:failover).should eq("Failover number (if set) on the DID")
+        DID.description(:forward).should eq("Forward number (if set) on the DID")
+      end
+
+      it "should be able to create a new DID from their erratic variable names" do
         date = Date.today
-        hashie_params= VoipApi::Mapping::VoipDID.new({
+        hashie_params = VoipApi::Mapping::VoipDID.new({
           tn: "tn",
           availability: "availability",
           expireDate: date,
-          endpoint: 5,
+          endpoint_id: 5,
           rewrite: "rewrite",
           status: "status",
           statusCode: "statusCode",
@@ -42,8 +42,8 @@ module VoipApi
           cnamName: 'Whatever',
           cnamStorageActive: false,
           cnamStorageAvailability: false,
-          registered911: true,
-          registered411: true,
+          has911: true,
+          has411: true,
           failover: 5,
           forward: 37,
         })
@@ -68,5 +68,14 @@ module VoipApi
         did.forward.should eq(37)
       end
     end
+
+    describe "concerning enumerable and sorting modules" do
+      it "should be able to be sorted by telephone number" do
+        @did_1 = DID.new(tn: '4355551233')
+        @did_2 = DID.new(tn: '4355551234')
+        [@did_2, @did_1].sort.should match_array([@did_1, @did_2])
+      end
+    end
+
   end
 end

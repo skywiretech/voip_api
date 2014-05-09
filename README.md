@@ -34,8 +34,26 @@ irb
 
 ```ruby
 require 'voip_api'
+
+VoipApi.configure do |c|
+  c.login  = "my_login_name"
+  c.secret = "my_secret_password"
+end
+
 api_account = VoipApi.account
 
-# Make a request
-api_account.request(web_method, params={})
+# Make a request for a DID
+api = VoipApi::API::DIDRequest.new
+request = api.query_did('4355551234')
+response = request.parsed_response
 ```
+
+### DIDs
+
+You can query the VOIP Innovations API for information about DIDs using the following methods:
+
+`query_did(did_number)`
+
+This method corresponds to the VOIP Innovations API method `queryDIDs`. See the documentation for more methods.
+
+This gem tries to correlate the API calls to a RESTful style resource pattern.
