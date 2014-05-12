@@ -23,23 +23,22 @@ module VoipApi
       setup_savon_client.operations.sort
     end
 
-    def request(api_method, my_params={})
+    def request(api_method, response_klass, my_params={})
       savon_client = setup_savon_client
 
       params = my_params.merge(login: VoipApi.login, secret: VoipApi.secret)
 
       # Invoke the call to the API
       begin
-        response = savon_client.call(api_method, message: params)
+        savon_response = savon_client.call(api_method, message: params)
       rescue Savon::Error => error
         Logger.log "Savon Error Encountered: #{error.http.code} #{error.message}"
       end
 
-      if response.success? && !response.soap_fault? && !response.http_error?
-        # Have this get converted to the appropriate kind of response
-        klass = VoipApi::Response.proper_response_class(api_method)
-        if klass
-          klass.new(response)
+      if savon_response.success? && !savon_response.soap_fault? && !savon_response.http_error?
+        # Have this get converted to the appropriate kind of savon_response
+        if response_klass
+          response_klass.new(savon_response)
         end
       end
     end

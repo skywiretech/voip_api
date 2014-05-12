@@ -1,0 +1,18 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <isPortableResponse xmlns="http://tempuri.org/">
+      <isPortableResult>
+        <responseCode>100</responseCode>
+        <responseMessage>Success</responseMessage>
+        <PortDetails>
+          <id>0</id>
+          <submittedDate xsi:nil="true"/>
+          <focDate xsi:nil="true"/>
+          <requestedFocDate xsi:nil="true"/>
+          <defaultEndpointGroup xsi:nil="true"/>
+        </PortDetails>
+        <IsPortable>true</IsPortable>
+      </isPortableResult>
+    </isPortableResponse>
+  </soap:Body>
+</soap:Envelope>

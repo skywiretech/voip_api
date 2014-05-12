@@ -1,0 +1,34 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <getPortDetailsResponse xmlns="http://tempuri.org/">
+      <getPortDetailsResult>
+        <responseCode>100</responseCode>
+        <responseMessage>Success</responseMessage>
+        <PortDetails>
+          <id>36623</id>
+          <status>PENDING SIGNATURE</status>
+          <endUser>Rob  Richey</endUser>
+          <billingTN>9999999999</billingTN>
+          <portingFrom/>
+          <submittedDate xsi:nil="true"/>
+          <focDate xsi:nil="true"/>
+          <requestedFocDate xsi:nil="true"/>
+          <dids>
+            <PortDID>
+              <tn>9999999999</tn>
+              <tier>0</tier>
+              <rateCenter>TEST</rateCenter>
+              <state>NA</state>
+              <lata>999</lata>
+              <endpointGroup>8674</endpointGroup>
+              <cnam>true</cnam>
+              <e911>true</e911>
+            </PortDID>
+          </dids>
+          <defaultEndpointGroup>8674</defaultEndpointGroup>
+        </PortDetails>
+        <IsPortable>false</IsPortable>
+      </getPortDetailsResult>
+    </getPortDetailsResponse>
+  </soap:Body>
+</soap:Envelope>

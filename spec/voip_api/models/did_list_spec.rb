@@ -27,14 +27,14 @@ module VoipApi
 
       it "supports pushing a new element" do
         @did_4 = DID.new(tn: '4355551236', cnam_name: 'CCC')
-        @did_list.dids.push(@did_4)
-        @did_list.dids.should match_array([@did_1, @did_2, @did_3, @did_4])
+        @did_list.collection.push(@did_4)
+        @did_list.collection.should match_array([@did_1, @did_2, @did_3, @did_4])
       end
 
       it "supports popping off an element" do
-        @did_list.dids.should match_array([@did_1, @did_2, @did_3])
+        @did_list.collection.should match_array([@did_1, @did_2, @did_3])
         @did_list.pop
-        @did_list.dids.should match_array([@did_1, @did_2])
+        @did_list.collection.should match_array([@did_1, @did_2])
       end
     end
   end

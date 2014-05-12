@@ -5,14 +5,14 @@ module VoipApi
 
     describe "concerning converting stuff from VOIP api casing to our standard camelcasing" do
       it "can give you a description of an attribute" do
-        DIDLocator.description(:tn).should eq("Telephone number of the DID")
+        DIDLocator.description(:tn).should eq("Telephone number of the DID matching your search criteria")
+        DIDLocator.description(:rate_center).should eq("The name of the Rate Center that matches your search criteria")
         DIDLocator.description(:state).should eq("Two-letter state abbreviation that matches your search criteria")
+        DIDLocator.description(:tier).should eq("Pricing tier on which the number in your search criteria resides")
         DIDLocator.description(:lata_id).should eq("The LATA that matches your search criteria")
-        DIDLocator.description(:rate_center).should eq("Name of the rate center that matches your search criteria")
-        DIDLocator.description(:tier).should eq("Tier in which the number resides")
-        DIDLocator.description(:t_38).should eq("Denotes whether T38 is true or false")
-        DIDLocator.description(:outbound_cnam).should eq("Denotes whether outbound CNAM is available")
-        DIDLocator.description(:sms).should eq("Has SMS")
+        DIDLocator.description(:outbound_cnam).should eq("Denotes whether or not the the DID in your search criteria supports CNAM Storage")
+        DIDLocator.description(:t_38).should eq("Denotes whether or not the DID in your search criteria is T38 capable")
+        DIDLocator.description(:sms).should eq("Denotes whether or not the DID in your search criteria supports inbound SMS")
       end
 
       it "should convert their XML response keys to sane camelcase keys" do
@@ -24,7 +24,7 @@ module VoipApi
           tier: "tier",
           t38: true,
           outboundCNAM: 'outboundCNAM',
-          hasSMS: false,
+          sms: false,
         })
         locator = DIDLocator.new(hashie_params)
         locator.tn.should eq("tn")
