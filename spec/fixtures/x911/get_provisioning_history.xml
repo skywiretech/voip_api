@@ -1,0 +1,30 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <getProvisioningHistoryResponse xmlns="http://tempuri.org/">
+      <getProvisioningHistoryResult>
+        <responseCode>100</responseCode>
+        <responseMessage>Success</responseMessage>
+        <Statuses/>
+        <DID911s/>
+        <VILocations>
+          <VILocation>
+            <locationId>17696872</locationId>
+            <address1>833 E TABERNACLE ST</address1>
+            <city>SAINT GEORGE</city>
+            <state>UT</state>
+            <zipCode>84770</zipCode>
+            <plusFour>3059</plusFour>
+            <callerName>Campus Villas</callerName>
+            <latitude>37.108235</latitude>
+            <longitude>-113.565547</longitude>
+            <statusCode>PROVISIONED</statusCode>
+            <statusDescription>Location is currently provisioned for URI</statusDescription>
+            <activatedTime>2014-03-24T19:14:39Z</activatedTime>
+            <updateTime>2014-03-24T19:14:40Z</updateTime>
+          </VILocation>
+        </VILocations>
+        <Alerts/>
+      </getProvisioningHistoryResult>
+    </getProvisioningHistoryResponse>
+  </soap:Body>
+</soap:Envelope>

@@ -1,6 +1,8 @@
 module VoipApi
+  # Correlates garbage SOAP keys into pretty, sane, hash keys
   module Mapping
 
+    # Normalizes Voip Innovations Soap keys into a sane format for DIDs
     class VoipDID < Hashie::Trash
       property :tn
       property :availability
@@ -26,6 +28,7 @@ module VoipApi
       property :forward
     end
 
+    # Normalizes Voip Innovations Soap keys into a sane format for DIDLocators
     class VoipDIDLocator < Hashie::Trash
       property :tn
       property :rate_center, from: :rateCenter
@@ -37,6 +40,7 @@ module VoipApi
       property :sms
     end
 
+    # Normalizes Voip Innovations Soap keys into a sane format for DIDCounts
     class VoipDIDCount < Hashie::Trash
       property :rate_center, from: :rateCenter
       property :state
@@ -48,6 +52,7 @@ module VoipApi
       property :sms
     end
 
+    # Normalizes Voip Innovations Soap keys into a sane format for PortDetails
     class VoipPortDetail < Hashie::Trash
       property :id
       property :status
@@ -61,11 +66,13 @@ module VoipApi
       property :default_endpooint_group, from: :defaultEndpointGroup
     end
 
+    # Normalizes Voip Innovations Soap keys into a sane format for EndpointGroups
     class VoipEndpointGroup < Hashie::Trash
       property :name
       property :id
     end
 
+    # Normalizes Voip Innovations Soap keys into a sane format for PortDIDs
     class VoipPortDID < Hashie::Trash
       property :tn
       property :tier
@@ -77,11 +84,54 @@ module VoipApi
       property :e_911, from: :e911
     end
 
+    # Normalizes Voip Innovations Soap keys into a sane format for DIDParams
     class VoipDIDParam < Hashie::Trash
       property :tn
       property :epg
       property :cnam
       property :ref_id, from: :refId
+    end
+
+    # Normalizes Voip Innovations Soap keys into a sane format for Status911
+    class VoipStatus911 < Hashie::Trash
+      property :status_code, from: :statusCode
+      property :status_description, from: :statusDescription
+    end
+
+    # Normalizes Voip Innovations Soap keys into a sane format for DID911
+    class VoipDID911 < Hashie::Trash
+      property :location_id, from: :locationId
+      property :tn
+      property :caller_name, from: :callerName
+      property :address1
+      property :address2
+      property :city
+      property :state
+      property :zip_code, from: :zipCode
+      property :latitude
+      property :longitude
+      property :status_code, from: :statusCode
+      property :status_description, from: :statusDescription
+      property :activated_time, from: :activatedTime
+      property :date_added, from: :dateAdded
+    end
+
+    # Normalizes Voip Innovations Soap keys into a sane format for VILocation
+    class VoipVILocation < Hashie::Trash
+      property :location_id, from: :locationId
+      property :address1
+      property :address2
+      property :city
+      property :state
+      property :zip_code, from: :zipCode
+      property :plus_four, from: :plusFour
+      property :caller_name, from: :callerName
+      property :latitude
+      property :longitude
+      property :activated_time, from: :activatedTime
+      property :update_time, from: :updateTime
+      property :status_code, from: :statusCode
+      property :status_description, from: :statusDescription
     end
 
   end

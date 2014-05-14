@@ -1,0 +1,32 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <getLocationsResponse xmlns="http://tempuri.org/">
+      <getLocationsResult>
+        <responseCode>100</responseCode>
+        <responseMessage>Success</responseMessage>
+        <Statuses/>
+        <DID911s/>
+        <VILocations>
+          <VILocation>
+            <locationId/>
+            <address1/>
+            <address2/>
+            <city/>
+            <state/>
+            <zipCode/>
+            <plusFour/>
+            <callerName/>
+            <latitude/>
+            <longitude/>
+            <statusCode>206200</statusCode>
+            <statusDescription>A location could not be found for 4353198001</statusDescription>
+            <orderId/>
+            <activatedTime>0001-01-01T00:00:00</activatedTime>
+            <updateTime>0001-01-01T00:00:00</updateTime>
+          </VILocation>
+        </VILocations>
+        <Alerts/>
+      </getLocationsResult>
+    </getLocationsResponse>
+  </soap:Body>
+</soap:Envelope>

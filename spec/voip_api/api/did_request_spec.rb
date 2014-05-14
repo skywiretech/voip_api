@@ -132,7 +132,7 @@ module VoipApi
         end
 
         describe "#release_did" do
-          it "can reserve a DID for up to 30 minutes" do
+          it "it can release an existing DID" do
             message = { 
               did_params: {"DIDParam" => {tn: '4352154006'}},
               login: VoipApi.login, 
@@ -146,6 +146,46 @@ module VoipApi
             # Query the API
             api = DIDRequest.new
             query = api.release_did('4352154006')
+
+            expect(query.response.savon).to be_successful
+          end
+        end
+
+        describe "#assign_did" do
+          it "can assign a DID to an endpoint group" do
+            message = { 
+              did_params: {"DIDParam" => {tn: '4352154006', epg: 8674}},
+              login: VoipApi.login, 
+              secret: VoipApi.secret 
+            }
+            fixture = File.read("spec/fixtures/did/assign_did.xml")
+
+            # set up an expectation
+            savon.expects(:assign_did).with(message: message).returns(fixture)
+
+            # Query the API
+            api = DIDRequest.new
+            query = api.assign_did("4352154006", 8674)
+
+            expect(query.response.savon).to be_successful
+          end
+        end
+
+        describe "#config_did" do
+          it "can configure an existing DID" do
+            message = { 
+              did_params: {"DIDParam" => {tn: '4352154006', epg: 8675}},
+              login: VoipApi.login, 
+              secret: VoipApi.secret 
+            }
+            fixture = File.read("spec/fixtures/did/config_did.xml")
+
+            # set up an expectation
+            savon.expects(:config_did).with(message: message).returns(fixture)
+
+            # Query the API
+            api = DIDRequest.new
+            query = api.config_did("4352154006", 8675)
 
             expect(query.response.savon).to be_successful
           end

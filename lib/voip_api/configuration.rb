@@ -1,4 +1,5 @@
 module VoipApi
+  # Encapsultes methods and constants relating to configuring the VoipApi gem.
   module Configuration
 
     # Where Voip Innovations has their latest WSDL definition
@@ -13,8 +14,7 @@ module VoipApi
     # The valid keys for creating a new API class
     VALID_OPTIONS = [:login, :secret, :namespace, :wsdl, :filters].freeze
 
-    # @private
-    attr_accessor *VALID_OPTIONS
+    VALID_OPTIONS.each { |k| attr_accessor k }
 
     # When this module is extended, set all configuration options to their default values
     def self.extended(base)
@@ -31,6 +31,7 @@ module VoipApi
       Hash[VALID_OPTIONS.map { |key| [key, send(key)] }]
     end
 
+    # Resets all the values to their defaults.
     def reset
       self.wsdl      = DEFAULT_WSDL
       self.namespace = DEFAULT_NAMESPACE

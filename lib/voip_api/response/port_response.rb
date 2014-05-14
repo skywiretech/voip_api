@@ -1,10 +1,18 @@
 module VoipApi
 
+  # A PortResponse is returned by calls to porting (LNP) information methods.
+  # @see VoipApi::API::PortRequest#get_port_details
+  # @see VoipApi::API::PortRequest#is_portable
   class PortResponse < Response
+
+    # @!visibility private
     def initialize(response)
       super
     end
 
+    # Parses the SOAP response returned from Savon into a format we can use
+    # @param action [Symbol] The SOAP action used in the request
+    # @return [Hash] Returns a hash containing the pertinent information.
     def parse(action=nil)
       result = {voip_response: {response_code: nil, response_message: nil}, payload: {is_portable: nil}}
       if body
@@ -44,6 +52,9 @@ module VoipApi
       result
     end
 
+    # Provides detailed information about VOIP Innovations response codes
+    # @param code [Integer] The response code returned in the SOAP XML envelope
+    # @return [Array<Symbol, String>] Returns an array of the status code category and status code interpretation
     def self.status_code_detail(code)
       case code.to_i
       when 100

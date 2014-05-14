@@ -2,11 +2,10 @@ require 'savon'
 
 module VoipApi
 
+  # Represents the Savon Request being sent to the API
   module Request
 
-    # Sandbox Ops:
-    # [:add_location, :assign_did, :assign_intl_did, :audit911, :audit_di_ds, :config_did, :get_cnam_display, :get_countries, :get_di_ds, :get_did_count, :get_fax_to_email, :get_locations, :get_port_details, :get_provisioning_history, :insert911, :is_portable, :provision_location, :query911, :query_did, :release_did, :release_intl_did, :remove911, :remove_cnam, :remove_fax_to_email, :remove_location, :reserve_did, :set_fax_to_email, :update911, :update_cnam_display, :validate911]
-
+    # Configures Savon for interfacing with dirty, dirty SOAP API's
     def setup_savon_client
       client = Savon.client do |globals|
         globals.wsdl @wsdl
@@ -19,10 +18,15 @@ module VoipApi
       client
     end
 
+    # Get a list of all operations supported by the WSDL
     def operations
       setup_savon_client.operations.sort
     end
 
+    # Invoke an API request
+    # @param api_method [Symbol] The api_method key which savon has parsed from the WSDL
+    # @param response_klass [Constant] The name of the class which will parse the response
+    # @param my_params [Hash] An array of arguments to be passed to the VOIP Innovations API
     def request(api_method, response_klass, my_params={})
       savon_client = setup_savon_client
 
