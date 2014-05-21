@@ -116,6 +116,7 @@ module VoipApi
       end
 
       # This method adds a location to the 911 service provider as well as our database. 
+      # @param did [String] The telephone number to remove the location from
       # @param address1 [String] The primary street address
       # @param address2 [String] The secondary street address
       # @param city [String] The city
@@ -124,8 +125,9 @@ module VoipApi
       # @param plus_four [String] The 4 digit ZIP Code extension
       # @param caller_name [String] The Caller Name
       # @note An invalid or 'cannot be geocoded' location will be added to the 911 service provider, but not our database Caller name for added location will overwrite the caller name on all other locations for the given DID.
-      def add_location(address1, address2, city, state, zip, plus_four, caller_name)
+      def add_location(did, address1, address2, city, state, zip, plus_four, caller_name)
         self.arguments = {
+          did: did,
           address1: address1, 
           address2: address2, 
           city: city,

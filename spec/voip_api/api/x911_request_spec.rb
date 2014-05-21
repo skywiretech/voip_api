@@ -136,28 +136,28 @@ module VoipApi
 
       describe "#add_location" do
           it "can add a new location" do
-            pending "write me"
-            # message = {
-            #   login: VoipApi.login, 
-            #   secret: VoipApi.secret,
-            #   address1: "150 NORTH 200 EAST",
-            #   address2: "Suite 201",
-            #   city: "SAINT GEORGE",
-            #   state: "UT",
-            #   zip: "84770",
-            #   plus_four: "",
-            #   caller_name: "Mango Voice",
-            # }
-            # fixture = File.read("spec/fixtures/x911/add_location.xml")
+            message = {
+              login: VoipApi.login, 
+              secret: VoipApi.secret,
+              did: '4353198001',
+              address1: "150 NORTH 200 EAST",
+              address2: "Suite 201",
+              city: "SAINT GEORGE",
+              state: "UT",
+              zip: "84770",
+              plus_four: "",
+              caller_name: "Mango Voice",
+            }
+            fixture = File.read("spec/fixtures/x911/add_location.xml")
 
-            # # set up an expectation
-            # savon.expects(:add_location).with(message: message).returns(fixture)
+            # set up an expectation
+            savon.expects(:add_location).with(message: message).returns(fixture)
 
-            # # Query the API
-            # api = X911Request.new
-            # query = api.add_location("150 NORTH 200 EAST", "Suite 201", "SAINT GEORGE", "UT", "84770", "", "Mango Voice")
+            # Query the API
+            api = X911Request.new
+            query = api.add_location("4353198001", "150 NORTH 200 EAST", "Suite 201", "SAINT GEORGE", "UT", "84770", "", "Mango Voice")
 
-            # expect(query.response.savon).to be_successful
+            expect(query.response.savon).to be_successful
           end
         end
 

@@ -1,1 +1,31 @@
-add_location.xml
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <addLocationResponse xmlns="http://tempuri.org/">
+      <addLocationResult>
+        <responseCode>100</responseCode>
+        <responseMessage>Success</responseMessage>
+        <Statuses/>
+        <DID911s/>
+        <VILocations>
+          <VILocation>
+            <locationId>18628501</locationId>
+            <address1>150 N 200 E</address1>
+            <address2>STE 201</address2>
+            <city>SAINT GEORGE</city>
+            <state>UT</state>
+            <zipCode>84770</zipCode>
+            <plusFour>2504</plusFour>
+            <callerName>Mango Voice</callerName>
+            <latitude>37.110683</latitude>
+            <longitude>-113.578863</longitude>
+            <statusCode>GEOCODED</statusCode>
+            <statusDescription>Location is geocoded</statusDescription>
+            <activatedTime>2014-05-21T22:27:05.26Z</activatedTime>
+            <updateTime>2014-05-21T22:27:04Z</updateTime>
+          </VILocation>
+        </VILocations>
+        <Alerts/>
+      </addLocationResult>
+    </addLocationResponse>
+  </soap:Body>
+</soap:Envelope>
