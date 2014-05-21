@@ -17,8 +17,6 @@ module VoipApi
   # @attr [String] status_description Describes the status code
   # @see VoipApi::API::X911Request#get_locations
   class VILocation
-    # TODO: include comparable
-
     attr_accessor :location_id, :address1, :address2, :city, :state, :zip_code, :plus_four, :caller_name, :latitude, :longitude, :activated_time, :update_time, :status_code, :status_description
 
     # @!visibility private
@@ -28,8 +26,6 @@ module VoipApi
         instance_variable_set("@#{k}", v) unless v.nil?
       end
     end
-
-    # TOOD: have them sort by location_id ?
 
     # Describes the attribute passed in
     # @param attribute [Symbol] A symbol representing the attribute for which you desire a description of
