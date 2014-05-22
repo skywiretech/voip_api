@@ -131,6 +131,14 @@ module VoipApi
       # @param caller_name [String] The Caller Name
       # @note An invalid or 'cannot be geocoded' location will be added to the 911 service provider, but not our database Caller name for added location will overwrite the caller name on all other locations for the given DID.
       def add_location(did, address1, address2, city, state, zip, plus_four, caller_name)
+        raise ArgumentError unless did.is_a?(String)
+        raise ArgumentError unless address1.is_a?(String)
+        raise ArgumentError unless address2.is_a?(String)
+        raise ArgumentError unless city.is_a?(String)
+        raise ArgumentError unless state.is_a?(String)
+        raise ArgumentError unless zip.is_a?(String)
+        raise ArgumentError unless plus_four.is_a?(String)
+        raise ArgumentError unless caller_name.is_a?(String)
         self.arguments = {
           did: did,
           address1: address1, 
@@ -151,6 +159,8 @@ module VoipApi
       # @param did [String] The telephone number to remove the location from
       # @note INVALID locations cannot be removed.
       def remove_location(location_id, did)
+        raise ArgumentError unless location_id.is_a?(String)
+        raise ArgumentError unless did.is_a?(String)
         self.arguments = {
           location_id: location_id,
           did: did,
@@ -171,7 +181,27 @@ module VoipApi
       # @param caller_name [String] The Caller Name
       # @note An INVALID location information will result in no provisioned location for the specified DID.
       def update_911(did, address1, address2, city, state, zip, plus_four, caller_name)
-        :update911
+        raise ArgumentError unless did.is_a?(String)
+        raise ArgumentError unless address1.is_a?(String)
+        raise ArgumentError unless address2.is_a?(String)
+        raise ArgumentError unless city.is_a?(String)
+        raise ArgumentError unless state.is_a?(String)
+        raise ArgumentError unless zip.is_a?(String)
+        raise ArgumentError unless plus_four.is_a?(String)
+        raise ArgumentError unless caller_name.is_a?(String)
+        self.arguments = {
+          did: did,
+          address1: address1, 
+          address2: address2, 
+          city: city,
+          state: state,
+          zip: zip,
+          plus_four: plus_four,
+          caller_name: caller_name,
+        }
+        self.action = :update911
+        self.response = VoipApi.account.request(self.action, self.klass, self.arguments)
+        self
       end
 
       # This method adds and provisions a 911 location for a DID that is currently registered with your account.
@@ -183,15 +213,38 @@ module VoipApi
       # @param zip [String] The 5 digit ZIP Code
       # @param plus_four [String] The 4 digit ZIP Code extension
       # @param caller_name [String] The Caller Name
-      # @note An INVALID location information will result in no provisioned location for the specified DID.
       def insert_911(did, address1, address2, city, state, zip, plus_four, caller_name)
-        :insert911
+        raise ArgumentError unless did.is_a?(String)
+        raise ArgumentError unless address1.is_a?(String)
+        raise ArgumentError unless address2.is_a?(String)
+        raise ArgumentError unless city.is_a?(String)
+        raise ArgumentError unless state.is_a?(String)
+        raise ArgumentError unless zip.is_a?(String)
+        raise ArgumentError unless plus_four.is_a?(String)
+        raise ArgumentError unless caller_name.is_a?(String)
+        self.arguments = {
+          did: did,
+          address1: address1, 
+          address2: address2, 
+          city: city,
+          state: state,
+          zip: zip,
+          plus_four: plus_four,
+          caller_name: caller_name,
+        }
+        self.action = :insert911
+        self.response = VoipApi.account.request(self.action, self.klass, self.arguments)
+        self
       end
 
       # This method removes the 911 information associated with a DID
       # @param did [String] The telephone number to remove 911 services from
-      def remove_911
-        :remove911
+      def remove_911(did)
+        raise ArgumentError unless did.is_a?(String)
+        self.arguments = {did: did}
+        self.action = :remove911
+        self.response = VoipApi.account.request(self.action, self.klass, self.arguments)
+        self
       end
 
       # Parsing and Chaining Operations
@@ -218,6 +271,18 @@ module VoipApi
       # @return [Array] Returns an array of the VILocations
       def vi_locations
         vi_locations_list ? vi_locations_list.collection : []
+      end
+
+      # Returns a DIDList containing all the Status911s
+      # @return [Object] Returns a DIDList which has a collection of Status911s
+      def statuses_911_list
+        payload[:statuses].nil? ? nil : payload[:statuses]
+      end
+
+      # Returns the array of actual Status911s
+      # @return [Array] Returns an array of the Status911s
+      def statuses_911
+        statuses_911_list ? statuses_911_list.collection : []
       end
 
       # Returns a detailed status of the 911 Verification

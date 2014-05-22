@@ -5,18 +5,18 @@ module VoipApi
     
     describe "concerning converting stuff from VOIP api casing to our standard camelcasing" do
       it "can give you a description of an attribute" do
-        Status911.description(:status_code).should eq("Used to determine the status of the database call")
-        Status911.description(:status_description).should eq("Describes the staus of the database call")
+        Status911.description(:code).should eq("Used to determine the status of the database call")
+        Status911.description(:description).should eq("Describes the staus of the database call")
       end
 
       it "should be able to create a new status_911 from their erratic variable names" do
         hashie_params = VoipApi::Mapping::VoipStatus911.new({
-          statusCode: "statusCode",
-          statusDescription: "statusDescription",
+          code: "code",
+          description: "description",
         })
         status_911 = Status911.new(hashie_params)
-        status_911.status_code.should eq("statusCode")
-        status_911.status_description.should eq("statusDescription")
+        status_911.code.should eq("code")
+        status_911.description.should eq("description")
       end
     end
 

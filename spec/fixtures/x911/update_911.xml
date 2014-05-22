@@ -1,0 +1,19 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <update911Response xmlns="http://tempuri.org/">
+      <update911Result>
+        <responseCode>100</responseCode>
+        <responseMessage>Success</responseMessage>
+        <Statuses>
+          <Status911>
+            <code>100</code>
+            <description>Location status updated</description>
+          </Status911>
+        </Statuses>
+        <DID911s/>
+        <VILocations/>
+        <Alerts/>
+      </update911Result>
+    </update911Response>
+  </soap:Body>
+</soap:Envelope>

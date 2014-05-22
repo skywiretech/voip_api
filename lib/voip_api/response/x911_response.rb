@@ -84,7 +84,23 @@ module VoipApi
             end
           end
 
-          # TODO: 911 Statuses
+          # 911 Statuses
+          statuses = response_result[:statuses]
+          if statuses
+            result[:payload][:statuses] ||= VoipApi::DIDList.new
+            if statuses.is_a?(Hash)
+              # Single element
+              result[:payload][:statuses].push(Status911.new(VoipApi::Mapping::VoipStatus911.new(statuses[:status911])))
+            else
+              # Multiple elements
+              statuses.each do |key, status_result_set|
+                status_result_set.each do |status_data|
+                  # Store the VI_Locations in a List essentially.
+                  result[:payload][:statuses].push(Status911.new(VoipApi::Mapping::VoipStatus911.new(status_data)))
+                end
+              end
+            end
+          end
 
         end
       end

@@ -216,6 +216,80 @@ module VoipApi
           end
         end
 
+        describe '#remove_911' do
+          it "can remove the 911 information from a DID" do
+            message = {
+              login: VoipApi.login, 
+              secret: VoipApi.secret,
+              did: "4353198001",
+            }
+            fixture = File.read("spec/fixtures/x911/remove_911.xml")
+
+            # set up an expectation
+            savon.expects(:remove911).with(message: message).returns(fixture)
+
+            # Query the API
+            api = X911Request.new
+            query = api.remove_911("4353198001")
+
+            expect(query.response.savon).to be_successful
+          end
+        end
+
+        describe "#insert_911" do
+          it "can insert 911 information directly into a DID" do
+            message = {
+              login: VoipApi.login, 
+              secret: VoipApi.secret,
+              did: '4353198001',
+              address1: "150 NORTH 200 EAST",
+              address2: "Suite 201",
+              city: "SAINT GEORGE",
+              state: "UT",
+              zip: "84770",
+              plus_four: "",
+              caller_name: "Mango Voice",
+            }
+            fixture = File.read("spec/fixtures/x911/insert_911.xml")
+
+            # set up an expectation
+            savon.expects(:insert911).with(message: message).returns(fixture)
+
+            # Query the API
+            api = X911Request.new
+            query = api.insert_911("4353198001", "150 NORTH 200 EAST", "Suite 201", "SAINT GEORGE", "UT", "84770", "", "Mango Voice")
+
+            expect(query.response.savon).to be_successful
+          end
+        end
+
+        describe "#update_911" do
+          it "can update existing 911 information for an existing DID" do
+            message = {
+              login: VoipApi.login, 
+              secret: VoipApi.secret,
+              did: '4353198001',
+              address1: "150 NORTH 200 EAST",
+              address2: "Suite 201",
+              city: "SAINT GEORGE",
+              state: "UT",
+              zip: "84770",
+              plus_four: "",
+              caller_name: "Mango Voice",
+            }
+            fixture = File.read("spec/fixtures/x911/update_911.xml")
+
+            # set up an expectation
+            savon.expects(:update911).with(message: message).returns(fixture)
+
+            # Query the API
+            api = X911Request.new
+            query = api.update_911("4353198001", "150 NORTH 200 EAST", "Suite 201", "SAINT GEORGE", "UT", "84770", "", "Mango Voice")
+
+            expect(query.response.savon).to be_successful
+          end
+        end
+
       end
     end
 

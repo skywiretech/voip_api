@@ -101,8 +101,8 @@ module VoipApi
 
     # Normalizes Voip Innovations Soap keys into a sane format for Status911
     class VoipStatus911 < VoipMapping
-      property :status_code, from: :statusCode
-      property :status_description, from: :statusDescription
+      property :code
+      property :description
     end
 
     # Normalizes Voip Innovations Soap keys into a sane format for DID911
