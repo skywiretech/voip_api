@@ -195,6 +195,27 @@ module VoipApi
           end
         end
 
+        describe '#provision_location' do
+          it "can provision a location to a DID" do
+            message = {
+              login: VoipApi.login, 
+              secret: VoipApi.secret,
+              did: "4353198001",
+              location_id: "18637602",
+            }
+            fixture = File.read("spec/fixtures/x911/provision_location.xml")
+
+            # set up an expectation
+            savon.expects(:provision_location).with(message: message).returns(fixture)
+
+            # Query the API
+            api = X911Request.new
+            query = api.provision_location("4353198001", "18637602")
+
+            expect(query.response.savon).to be_successful
+          end
+        end
+
       end
     end
 
