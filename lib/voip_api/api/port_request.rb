@@ -43,24 +43,28 @@ module VoipApi
 
       # The information regarding the Port Details.
       # @return [Object] Returns a PortDetail object containing the information parsed from the request
+      # @!group Chaining
       def port_details
         payload[:port_details].nil? ? nil : payload[:port_details]
       end
 
       # Returns a DIDList containing all the port DIDs
       # @return [Object] Returns a DIDList which has a collection of PortDIDs
+      # @!group Chaining
       def port_dids_list
         payload[:port_dids].nil? ? nil : payload[:port_dids]
       end
 
       # Returns the array of actual PortDIDs
       # @return [Array] Returns an array of the PortDID objects
+      # @!group Chaining
       def port_dids
         port_dids_list ? port_dids_list.collection : []
       end
 
       # Determines whether this telephone number is portable.
       # @return [Boolean] Returns true or false to indicate that this telephone number can be ported.
+      # @!group Chaining
       def is_portable?
         payload[:is_portable]
       end

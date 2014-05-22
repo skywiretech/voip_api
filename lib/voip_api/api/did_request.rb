@@ -198,43 +198,50 @@ module VoipApi
       # Find out where this number forwards
       def get_did_forward
         # TODO: assuming that this is the right name of the SOAP action
-        :get_did_forward
+        # :get_did_forward
+        raise NotImplementedError
       end
 
       # Parsing and Chaining Operations
 
       # Returns a DIDList containing all the DIDs
       # @return [Object] Returns a DIDList which has a collection of DIDs
+      # @!group Chaining
       def dids_list
         payload[:dids].nil? ? nil : payload[:dids]
       end
 
       # Returns the array of actual DIDs
       # @return [Array] Returns an array of the DID's
+      # @!group Chaining
       def dids
         dids_list ? dids_list.collection : []
       end
 
       # Returns a DIDList containing all the DIDLocators
       # @return [Object] Returns a DIDList which has a collection of DIDLocators
+      # @!group Chaining
       def did_locators_list
         payload[:did_locators].nil? ? nil : payload[:did_locators]
       end
 
       # Returns the array of actual DIDLocators
       # @return [Array] Returns an array of the DIDLocators
+      # @!group Chaining
       def did_locators
         did_locators_list ? did_locators_list.collection : []
       end
 
       # Returns a DIDList containing all the DIDCounts
       # @return [Object] Returns a DIDList which has a collection of DIDCounts
+      # @!group Chaining
       def did_counts_list
         payload[:did_counts].nil? ? nil : payload[:did_counts]
       end
 
       # Returns the array of actual DIDCounts
       # @return [Array] Returns an array of the DIDCounts
+      # @!group Chaining
       def did_counts
         did_counts_list ? did_counts_list.collection : []
       end

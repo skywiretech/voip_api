@@ -251,41 +251,48 @@ module VoipApi
 
       # Returns a DIDList containing all the DID911s
       # @return [Object] Returns a DIDList which has a collection of DID911s
+      # @!group Chaining
       def dids_911_list
         payload[:dids_911].nil? ? nil : payload[:dids_911]
       end
 
       # Returns the array of actual DID911s
       # @return [Array] Returns an array of the DID911's
+      # @!group Chaining
       def dids_911
         dids_911_list ? dids_911_list.collection : []
       end
 
       # Returns a DIDList containing all the VILocations
       # @return [Object] Returns a DIDList which has a collection of VILocations
+      # @!group Chaining
       def vi_locations_list
         payload[:vi_locations].nil? ? nil : payload[:vi_locations]
       end
 
       # Returns the array of actual VILocations
       # @return [Array] Returns an array of the VILocations
+      # @!group Chaining
       def vi_locations
         vi_locations_list ? vi_locations_list.collection : []
       end
 
       # Returns a DIDList containing all the Status911s
       # @return [Object] Returns a DIDList which has a collection of Status911s
+      # @!group Chaining
       def statuses_911_list
         payload[:statuses].nil? ? nil : payload[:statuses]
       end
 
       # Returns the array of actual Status911s
       # @return [Array] Returns an array of the Status911s
+      # @!group Chaining
       def statuses_911
         statuses_911_list ? statuses_911_list.collection : []
       end
 
       # Returns a detailed status of the 911 Verification
+      # @!group Chaining
       def x911_validation_status
         # Parse out the code I guess?
         if (self.action == :validate911)
