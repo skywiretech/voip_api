@@ -11,7 +11,7 @@ VoipApi.configure do |config|
   # config.namespace = "http://tempuri.org/"
 
   # Change out what options will be filtered from Savon
-  # config.filters = [:password, :secret]
+  # config.filters = [:password, :secret, :pin]
 
   # Your login name for VOIP Innovations API
   # config.login = "mylogin"

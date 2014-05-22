@@ -12,7 +12,7 @@ module VoipApi
     DEFAULT_NAMESPACE = "http://tempuri.org/"
 
     # Default keys to filter out from Savon data
-    DEFAULT_FILTERS = [:password, :secret]
+    DEFAULT_FILTERS = [:password, :secret, :pin]
 
     # Are we in sandbox mode?
     USE_SANDBOX_MODE = false

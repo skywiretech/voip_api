@@ -20,7 +20,7 @@ module VoipApi
       end
 
       it "knows the DEFAULT_FILTERS" do
-        Configuration::DEFAULT_FILTERS.should match_array([:password, :secret])
+        Configuration::DEFAULT_FILTERS.should match_array([:password, :secret, :pin])
       end
 
       it "knows the USE_SANDBOX_MODE" do
@@ -56,7 +56,7 @@ module VoipApi
           secret: nil, 
           namespace: "http://tempuri.org/", 
           wsdl: my_wsdl,
-          filters: [:password, :secret],
+          filters: [:password, :secret, :pin],
           use_sandbox: false,
           use_test_wsdl: true,
         }
