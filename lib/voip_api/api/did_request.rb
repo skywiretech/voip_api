@@ -35,7 +35,7 @@ module VoipApi
       def assign_did(telephone_number, endpoint_group_id)
         raise ArgumentError unless (telephone_number && telephone_number.is_a?(String))
         raise ArgumentError unless (endpoint_group_id && endpoint_group_id.is_a?(Integer))
-        did_param = VoipApi::DIDParam.new(VoipApi::Mapping::VoipDIDParam.new({
+        did_param = VoipApi::Models::DIDParam.new(VoipApi::Mapping::VoipDIDParam.new({
           tn: telephone_number,
           epg: endpoint_group_id,
         }))
@@ -59,7 +59,7 @@ module VoipApi
       def config_did(telephone_number, endpoint_group_id)
         raise ArgumentError unless (telephone_number && telephone_number.is_a?(String))
         raise ArgumentError unless (endpoint_group_id && endpoint_group_id.is_a?(Integer))
-        did_param = VoipApi::DIDParam.new(VoipApi::Mapping::VoipDIDParam.new({
+        did_param = VoipApi::Models::DIDParam.new(VoipApi::Mapping::VoipDIDParam.new({
           tn: telephone_number,
           epg: endpoint_group_id,
         }))
@@ -162,7 +162,7 @@ module VoipApi
         raise ArgumentError unless (telephone_number && telephone_number.is_a?(String))
 
         # Make a new DIDParam
-        did_param = VoipApi::DIDParam.new(VoipApi::Mapping::VoipDIDParam.new({
+        did_param = VoipApi::Models::DIDParam.new(VoipApi::Mapping::VoipDIDParam.new({
           tn: telephone_number,
         }))
 
@@ -181,7 +181,7 @@ module VoipApi
       def reserve_did(telephone_number, endpoint_group_id, cnam = false, ref_id = "")
         raise ArgumentError unless (telephone_number && telephone_number.is_a?(String))
         raise ArgumentError unless (endpoint_group_id && endpoint_group_id.is_a?(Integer))
-        did_param = VoipApi::DIDParam.new(VoipApi::Mapping::VoipDIDParam.new({
+        did_param = VoipApi::Models::DIDParam.new(VoipApi::Mapping::VoipDIDParam.new({
           tn: telephone_number,
           epg: endpoint_group_id,
           cnam: cnam,

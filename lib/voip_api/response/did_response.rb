@@ -22,8 +22,6 @@ module VoipApi
     
     # @!visibility private
     def initialize(response)
-      @did_list = VoipApi::DIDList.new
-      @did_locators = []
       super
     end
 
@@ -50,17 +48,17 @@ module VoipApi
           my_dids = response_result[:di_ds]
           if my_dids
             # At least initialize the container item
-            result[:payload][:dids] ||= VoipApi::DIDList.new
+            result[:payload][:dids] ||= Models::DIDList.new
 
             if my_dids[:did].is_a?(Hash)
               # Single DID Entry (Hash)
-              result[:payload][:dids].push(DID.new(VoipApi::Mapping::VoipDID.new(my_dids[:did])))
+              result[:payload][:dids].push(Models::DID.new(VoipApi::Mapping::VoipDID.new(my_dids[:did])))
             else
               # Multiple DIDs (Array)
               # Store the DIDs in the DIDList container
               my_dids.each do |key, did_result_set|
                 did_result_set.each do |did_data|
-                  result[:payload][:dids].push(DID.new(VoipApi::Mapping::VoipDID.new(did_data)))
+                  result[:payload][:dids].push(Models::DID.new(VoipApi::Mapping::VoipDID.new(did_data)))
                 end
               end
             end
@@ -72,8 +70,8 @@ module VoipApi
             my_did_locators.each do |did_locator_set, locator_data_array|
               locator_data_array.each do |locator_data|
                 # Store the DIDLocators in the DIDList container
-                result[:payload][:did_locators] ||= VoipApi::DIDList.new
-                result[:payload][:did_locators].push(DIDLocator.new(VoipApi::Mapping::VoipDIDLocator.new(locator_data)))
+                result[:payload][:did_locators] ||= Models::DIDList.new
+                result[:payload][:did_locators].push(Models::DIDLocator.new(VoipApi::Mapping::VoipDIDLocator.new(locator_data)))
               end
             end
           end
@@ -83,8 +81,8 @@ module VoipApi
           if my_did_counts
             my_did_counts.each do |did_count_set, did_count_data_array|
               did_count_data_array.each do |kount_data|
-                result[:payload][:did_counts] ||= VoipApi::DIDList.new
-                result[:payload][:did_counts].push(DIDCount.new(VoipApi::Mapping::VoipDIDCount.new(kount_data)))
+                result[:payload][:did_counts] ||= Models::DIDList.new
+                result[:payload][:did_counts].push(Models::DIDCount.new(VoipApi::Mapping::VoipDIDCount.new(kount_data)))
               end
             end
           end

@@ -30,15 +30,15 @@ module VoipApi
           my_port_details = response_result[:port_details]
           if my_port_details
             # Setup the Port Detail itself
-            port_detail = VoipApi::PortDetail.new(my_port_details)
+            port_detail = Models::PortDetail.new(my_port_details)
 
             # Setup the Port DIDs
             my_port_dids = my_port_details[:dids]
             if my_port_dids
               my_port_dids.each do |port_did_key, port_did_values|
                 # Put it on the response object and on the actual object I guess
-                result[:payload][:port_dids] ||= VoipApi::DIDList.new
-                port_did = VoipApi::PortDID.new(port_did_values)
+                result[:payload][:port_dids] ||= Models::DIDList.new
+                port_did = Models::PortDID.new(port_did_values)
                 port_detail.port_dids.push(port_did)
                 result[:payload][:port_dids].push(port_did)
               end

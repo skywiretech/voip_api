@@ -50,17 +50,17 @@ module VoipApi
           x911_dids = response_result[:did911s]
           if x911_dids
             # At least initialize the container item
-            result[:payload][:dids_911] ||= VoipApi::DIDList.new
+            result[:payload][:dids_911] ||= Models::DIDList.new
 
             if x911_dids[:did911].is_a?(Hash)
               # Single DID911 Entry (Hash)
-              result[:payload][:dids_911].push(DID911.new(VoipApi::Mapping::VoipDID911.new(x911_dids[:did911])))
+              result[:payload][:dids_911].push(Models::DID911.new(VoipApi::Mapping::VoipDID911.new(x911_dids[:did911])))
             else
               # Multiple DIDs (Array)
               # Store the DIDs in the DIDList container
               x911_dids.each do |key, did_result_set|
                 did_result_set.each do |did_data|
-                  result[:payload][:dids_911].push(DID911.new(VoipApi::Mapping::VoipDID911.new(did_data)))
+                  result[:payload][:dids_911].push(Models::DID911.new(VoipApi::Mapping::VoipDID911.new(did_data)))
                 end
               end
             end
@@ -69,16 +69,16 @@ module VoipApi
           # VI_locations
           vi_locations = response_result[:vi_locations]
           if vi_locations
-            result[:payload][:vi_locations] ||= VoipApi::DIDList.new
+            result[:payload][:vi_locations] ||= Models::DIDList.new
             if vi_locations.is_a?(Hash)
               # Single element
-              result[:payload][:vi_locations].push(VILocation.new(VoipApi::Mapping::VoipVILocation.new(vi_locations[:vi_location])))
+              result[:payload][:vi_locations].push(Models::VILocation.new(VoipApi::Mapping::VoipVILocation.new(vi_locations[:vi_location])))
             else
               # Multiple elements
               vi_locations.each do |key, location_result_set|
                 location_result_set.each do |location_data|
                   # Store the VI_Locations in a List essentially.
-                  result[:payload][:vi_locations].push(VILocation.new(VoipApi::Mapping::VoipVILocation.new(location_data)))
+                  result[:payload][:vi_locations].push(Models::VILocation.new(VoipApi::Mapping::VoipVILocation.new(location_data)))
                 end
               end
             end
@@ -87,16 +87,16 @@ module VoipApi
           # 911 Statuses
           statuses = response_result[:statuses]
           if statuses
-            result[:payload][:statuses] ||= VoipApi::DIDList.new
+            result[:payload][:statuses] ||= Models::DIDList.new
             if statuses.is_a?(Hash)
               # Single element
-              result[:payload][:statuses].push(Status911.new(VoipApi::Mapping::VoipStatus911.new(statuses[:status911])))
+              result[:payload][:statuses].push(Models::Status911.new(VoipApi::Mapping::VoipStatus911.new(statuses[:status911])))
             else
               # Multiple elements
               statuses.each do |key, status_result_set|
                 status_result_set.each do |status_data|
                   # Store the VI_Locations in a List essentially.
-                  result[:payload][:statuses].push(Status911.new(VoipApi::Mapping::VoipStatus911.new(status_data)))
+                  result[:payload][:statuses].push(Models::Status911.new(VoipApi::Mapping::VoipStatus911.new(status_data)))
                 end
               end
             end
