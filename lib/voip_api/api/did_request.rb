@@ -6,7 +6,7 @@ module VoipApi
 
       # @param klass [Constant] The class name to use for parsing the response from Savon
       def initialize(klass=nil)
-        self.klass ||= VoipApi::DIDResponse
+        self.klass ||= VoipApi::APIResponse::DIDResponse
       end
 
       # @return [Array] Returns a list of soap action keys which are used to make requests to their Sandbox API
