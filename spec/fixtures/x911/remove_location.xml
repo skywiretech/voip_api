@@ -1,0 +1,19 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <removeLocationResponse xmlns="http://tempuri.org/">
+      <removeLocationResult>
+        <responseCode>100</responseCode>
+        <responseMessage>Success</responseMessage>
+        <Statuses>
+          <Status911>
+            <code>205100</code>
+            <description>Location successfully removed</description>
+          </Status911>
+        </Statuses>
+        <DID911s/>
+        <VILocations/>
+        <Alerts/>
+      </removeLocationResult>
+    </removeLocationResponse>
+  </soap:Body>
+</soap:Envelope>

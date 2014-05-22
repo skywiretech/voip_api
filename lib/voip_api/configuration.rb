@@ -2,8 +2,11 @@ module VoipApi
   # Encapsultes methods and constants relating to configuring the VoipApi gem.
   module Configuration
 
-    # Where Voip Innovations has their latest WSDL definition
-    DEFAULT_WSDL = "http://dev.voipinnovations.com/VOIP/Services/APIService.asmx?wsdl".freeze
+    # Where Voip Innovations has their latest WSDL definition for the Sandbox Environment
+    SANDBOX_WSDL = "http://dev.voipinnovations.com/VOIP/Services/APIService.asmx?wsdl".freeze
+
+    # Where Voip Innovations has their latest WSDL definition for the Production Environment
+    PRODUCTION_WSDL = "https://backoffice.voipinnovations.com/Services/APIService.asmx?wsdl".freeze
 
     # The default namespace
     DEFAULT_NAMESPACE = "http://tempuri.org/"
@@ -11,8 +14,14 @@ module VoipApi
     # Default keys to filter out from Savon data
     DEFAULT_FILTERS = [:password, :secret]
 
+    # Are we in sandbox mode?
+    USE_SANDBOX_MODE = false
+
+    # Are we running the specs? i.e., should we use the local copy of the WSDL?
+    USE_TEST_WSDL_COPY = true
+
     # The valid keys for creating a new API class
-    VALID_OPTIONS = [:login, :secret, :namespace, :wsdl, :filters].freeze
+    VALID_OPTIONS = [:login, :secret, :namespace, :wsdl, :filters, :use_sandbox, :use_test_wsdl].freeze
 
     VALID_OPTIONS.each { |k| attr_accessor k }
 
@@ -33,9 +42,15 @@ module VoipApi
 
     # Resets all the values to their defaults.
     def reset
-      self.wsdl      = DEFAULT_WSDL
-      self.namespace = DEFAULT_NAMESPACE
-      self.filters   = DEFAULT_FILTERS
+      self.namespace     = DEFAULT_NAMESPACE
+      self.filters       = DEFAULT_FILTERS
+      self.use_sandbox   = USE_SANDBOX_MODE
+      self.use_test_wsdl = USE_TEST_WSDL_COPY
+
+      # We default to using the local, production copy of the WSDL
+      self.wsdl = "spec/fixtures/wsdl/voip_production_wsdl.asmx"
+
+      # Add more directives here
     end
     
   end

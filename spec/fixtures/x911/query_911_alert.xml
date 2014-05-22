@@ -1,1 +1,14 @@
-query_911_alert.xml
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <Query911AlertResponse xmlns="http://tempuri.org/">
+      <Query911AlertResult>
+        <responseCode>941</responseCode>
+        <responseMessage>911 is not enabled</responseMessage>
+        <Statuses/>
+        <DID911s/>
+        <VILocations/>
+        <Alerts/>
+      </Query911AlertResult>
+    </Query911AlertResponse>
+  </soap:Body>
+</soap:Envelope>

@@ -126,6 +126,8 @@ module VoipApi
         [:add_911_alert, "Email already exists for this DID"]
       when 943
         [:add_911_alert, "Can not exceed 10 emails"]
+      when 205100 
+        [:remove_location, "Location successfully removed"]
       when 205200 
         [:remove_911, "Zero records deleted/archived"]
       when 206200  

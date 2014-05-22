@@ -129,12 +129,25 @@ module VoipApi
 
         describe "#query_911_alert" do
           it "can return the 911 alerts for the number being queried" do
-            pending "write me"
+            message = {
+              login: VoipApi.login, 
+              secret: VoipApi.secret,
+              tn: "4353198001",
+            }
+            fixture = File.read("spec/fixtures/x911/query_911_alert.xml")
+
+            # set up an expectation
+            savon.expects(:query911_alert).with(message: message).returns(fixture)
+
+            # Query the API
+            api = X911Request.new
+            query = api.query_911_alert("4353198001")
+
+            expect(query.response.savon).to be_successful
           end
-          
         end
 
-      describe "#add_location" do
+        describe "#add_location" do
           it "can add a new location" do
             message = {
               login: VoipApi.login, 
@@ -156,6 +169,27 @@ module VoipApi
             # Query the API
             api = X911Request.new
             query = api.add_location("4353198001", "150 NORTH 200 EAST", "Suite 201", "SAINT GEORGE", "UT", "84770", "", "Mango Voice")
+
+            expect(query.response.savon).to be_successful
+          end
+        end
+
+        describe "#remove_location" do
+          it "can add remove an existing location" do
+            message = {
+              login: VoipApi.login, 
+              secret: VoipApi.secret,
+              did: '4353198001',
+              location_id: "18628501",
+            }
+            fixture = File.read("spec/fixtures/x911/remove_location.xml")
+
+            # set up an expectation
+            savon.expects(:remove_location).with(message: message).returns(fixture)
+
+            # Query the API
+            api = X911Request.new
+            query = api.remove_location("18628501", "4353198001")
 
             expect(query.response.savon).to be_successful
           end

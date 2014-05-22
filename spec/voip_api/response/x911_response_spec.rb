@@ -20,6 +20,7 @@ module VoipApi
         X911Response.status_code_detail(941).should match_array([:add_911_alert, "911 is not enabled"])
         X911Response.status_code_detail(942).should match_array([:add_911_alert, "Email already exists for this DID"])
         X911Response.status_code_detail(943).should match_array([:add_911_alert, "Can not exceed 10 emails"])
+        X911Response.status_code_detail(205100).should match_array([:remove_location, "Location successfully removed"])
         X911Response.status_code_detail(205200).should match_array([:remove_911, "Zero records deleted/archived"])
         X911Response.status_code_detail(206200).should match_array([:get_locations, "No locations could be found"])
         X911Response.status_code_detail(nil).should match_array([:unknown, "Unknown code: "])
