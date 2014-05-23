@@ -27,8 +27,8 @@ module VoipApi
         describe '#get_port_details' do
           it "can get the details about a port" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login:  VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               port_id: 36623,
             }
             fixture = File.read("spec/fixtures/port/get_port_details.xml")
@@ -47,8 +47,8 @@ module VoipApi
         describe '#is_portable' do
           it "can find out if a telephone number is portable" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login:  VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               tn: "4352016526",
             }
             fixture = File.read("spec/fixtures/port/is_portable.xml")

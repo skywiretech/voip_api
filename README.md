@@ -40,20 +40,30 @@ VoipApi.configure do |c|
   c.secret = "my_secret_password"
 end
 
-api_account = VoipApi.account
+# Use the interface class for convenient proxy methods
+query = VoipApi.audit_dids
+query.request.dids # Returns the DID's array
 
-# Make a request for a DID
-api = VoipApi::API::DIDRequest.new
-request = api.query_did('4355551234')
-response = request.parsed_response
+# Find out what the payload is
+query.request.payload.keys
+
+# Find out the VOIP response code
+query.request.voip_response_code
+
+# Find out the VOIP response message
+query.request.voip_response_message
 ```
 
-### DIDs
+### Interface
 
-You can query the VOIP Innovations API for information about DIDs using the following methods:
+All the available API methods should be appropriately wrapped in a proxy class called `Interface`.
 
-`query_did(did_number)`
+### Documentation
 
-This method corresponds to the VOIP Innovations API method `queryDIDs`. See the documentation for more methods.
+See the yard documentation for more details, or generate it using the following command:
 
-This gem tries to correlate the API calls to a RESTful style resource pattern.
+```ruby
+bundle exec yard
+```
+
+The HTML documentation will then be generated under `doc/` for your convenience.

@@ -25,4 +25,10 @@ VoipApi.configure do |config|
   # Should we use the local copy of the WSDL so we can run specs?
   # config.use_test_wsdl = false
 
+  # Savon configures Nori to strip any namespace identifiers from the response
+  # config.strip_namespaces = true
+  
+  # Pretty print the request and response XML in your logs for debugging purposes
+  # config.pretty_print_xml = true
+
 end

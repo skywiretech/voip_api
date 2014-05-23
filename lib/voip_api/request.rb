@@ -11,9 +11,9 @@ module VoipApi
         globals.wsdl @wsdl
         globals.namespace @namespace
         globals.filters @filters
-        globals.pretty_print_xml true
+        globals.pretty_print_xml @pretty_print_xml
         globals.namespace_identifier :tns
-        globals.strip_namespaces true
+        globals.strip_namespaces @pretty_print_xml
       end
       client
     end
@@ -30,7 +30,7 @@ module VoipApi
     def request(api_method, response_klass, my_params={})
       savon_client = setup_savon_client
 
-      params = my_params.merge(login: VoipApi.login, secret: VoipApi.secret)
+      params = my_params.merge(login: VoipApi.account.login, secret: VoipApi.account.secret)
 
       # Invoke the call to the API
       begin

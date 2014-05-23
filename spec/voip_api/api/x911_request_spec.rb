@@ -27,7 +27,7 @@ module VoipApi
 
         describe "#audit911" do
           it "can return a collection of all the 911 DIDs for the account" do
-            message = { login: VoipApi.login, secret: VoipApi.secret }
+            message = { login: VoipApi.account.login, secret: VoipApi.account.secret }
             fixture = File.read("spec/fixtures/x911/audit_911.xml")
 
             # set up an expectation
@@ -44,8 +44,8 @@ module VoipApi
         describe '#get_locations' do
           it "can get the locations associated with a 911 number" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               did: "4353198001",
             }
             fixture = File.read("spec/fixtures/x911/get_locations.xml")
@@ -64,8 +64,8 @@ module VoipApi
         describe '#query_911' do
           it "can query a specific 911 number" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               did: "4353198001",
             }
             fixture = File.read("spec/fixtures/x911/query_911.xml")
@@ -84,8 +84,8 @@ module VoipApi
         describe "#validate_911" do
           it "can validate the 911 stuff" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               address1: "833 E TABERNACLE ST",
               address2: "",
               city: "SAINT GEORGE",
@@ -110,8 +110,8 @@ module VoipApi
         describe '#get_provisioning_history' do
           it "can get the provisioning history and locations" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               did: "4353198001",
             }
             fixture = File.read("spec/fixtures/x911/get_provisioning_history.xml")
@@ -130,8 +130,8 @@ module VoipApi
         describe "#query_911_alert" do
           it "can return the 911 alerts for the number being queried" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               tn: "4353198001",
             }
             fixture = File.read("spec/fixtures/x911/query_911_alert.xml")
@@ -150,8 +150,8 @@ module VoipApi
         describe "#add_location" do
           it "can add a new location" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               did: '4353198001',
               address1: "150 NORTH 200 EAST",
               address2: "Suite 201",
@@ -177,8 +177,8 @@ module VoipApi
         describe "#remove_location" do
           it "can add remove an existing location" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               did: '4353198001',
               location_id: "18628501",
             }
@@ -198,8 +198,8 @@ module VoipApi
         describe '#provision_location' do
           it "can provision a location to a DID" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               did: "4353198001",
               location_id: "18637602",
             }
@@ -219,8 +219,8 @@ module VoipApi
         describe '#remove_911' do
           it "can remove the 911 information from a DID" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               did: "4353198001",
             }
             fixture = File.read("spec/fixtures/x911/remove_911.xml")
@@ -239,8 +239,8 @@ module VoipApi
         describe "#insert_911" do
           it "can insert 911 information directly into a DID" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               did: '4353198001',
               address1: "150 NORTH 200 EAST",
               address2: "Suite 201",
@@ -266,8 +266,8 @@ module VoipApi
         describe "#update_911" do
           it "can update existing 911 information for an existing DID" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               did: '4353198001',
               address1: "150 NORTH 200 EAST",
               address2: "Suite 201",

@@ -11,10 +11,13 @@ module VoipApi
   # @attr [Array] filters An array of symbols to mask when generating SOAP XML requests
   # @attr [Boolean] use_sandbox Should we use the Sandbox mode for sending API Requests
   # @attr [Boolean] use_test_wsdl Should we use the local copy of the WSDL definition
+  # @attr [Boolean] strip_namespaces Savon configures Nori to strip any namespace identifiers from the response
+  # @attr [Boolean] pretty_print_xml Pretty print the request and response XML in your logs for debugging purposes
   class Account
     include Request
     include VoipApi::Mapping
     
+    # Setup our default options
     Configuration::VALID_OPTIONS.each { |k| attr_accessor k }
 
     # Creates a new account, which is currently the basis for all VOIP Innovations API calls.

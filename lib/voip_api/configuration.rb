@@ -21,7 +21,17 @@ module VoipApi
     USE_TEST_WSDL_COPY = true
 
     # The valid keys for creating a new API class
-    VALID_OPTIONS = [:login, :secret, :namespace, :wsdl, :filters, :use_sandbox, :use_test_wsdl].freeze
+    VALID_OPTIONS = [
+      :login,
+      :secret,
+      :namespace, 
+      :wsdl, 
+      :filters, 
+      :use_sandbox, 
+      :use_test_wsdl,
+      :strip_namespaces,
+      :pretty_print_xml,
+    ].freeze
 
     VALID_OPTIONS.each { |k| attr_accessor k }
 
@@ -42,10 +52,12 @@ module VoipApi
 
     # Resets all the values to their defaults.
     def reset
-      self.namespace     = DEFAULT_NAMESPACE
-      self.filters       = DEFAULT_FILTERS
-      self.use_sandbox   = USE_SANDBOX_MODE
-      self.use_test_wsdl = USE_TEST_WSDL_COPY
+      self.namespace        = DEFAULT_NAMESPACE
+      self.filters          = DEFAULT_FILTERS
+      self.use_sandbox      = USE_SANDBOX_MODE
+      self.use_test_wsdl    = USE_TEST_WSDL_COPY
+      self.strip_namespaces = true
+      self.pretty_print_xml = true
 
       # We default to using the local, production copy of the WSDL
       self.wsdl = "spec/fixtures/wsdl/voip_production_wsdl.asmx"

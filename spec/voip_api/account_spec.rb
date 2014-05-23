@@ -40,8 +40,8 @@ module VoipApi
         let(:account) { Account.new }
         
         it "should set the default login and secret" do
-          account.login.should be_nil
-          account.secret.should be_nil
+          account.send(:login).should be_nil
+          account.send(:secret).should be_nil
         end
 
         it "should pull in the default namespace" do
@@ -50,6 +50,14 @@ module VoipApi
 
         it "should pull in the default filters" do
           account.filters.should eq(VoipApi::Configuration::DEFAULT_FILTERS)
+        end
+
+        it "should strip the namespaces" do
+          account.strip_namespaces.should be_true
+        end
+
+        it "should pretty print the XML" do
+          account.pretty_print_xml.should be_true
         end
       end
     end

@@ -16,7 +16,7 @@ module VoipApi
       end
 
       it "knows the VALID_OPTIONS" do
-        Configuration::VALID_OPTIONS.should match_array([:login, :secret, :namespace, :wsdl, :filters, :use_sandbox, :use_test_wsdl])
+        Configuration::VALID_OPTIONS.should match_array([:login, :secret, :namespace, :wsdl, :filters, :use_sandbox, :use_test_wsdl, :strip_namespaces, :pretty_print_xml])
       end
 
       it "knows the DEFAULT_FILTERS" do
@@ -52,19 +52,25 @@ module VoipApi
           end
         end
         expected = {
-          login: nil, 
-          secret: nil, 
+          login: nil,
+          secret: nil,
           namespace: "http://tempuri.org/", 
           wsdl: my_wsdl,
           filters: [:password, :secret, :pin],
           use_sandbox: false,
           use_test_wsdl: true,
+          strip_namespaces: true,
+          pretty_print_xml: true,
         }
         VoipApi.options.should eq(expected)
       end
 
       it "should be able to create a new account" do
         VoipApi.account.should be_a(Account)
+      end
+
+      it "should be able to create a new interface" do
+        VoipApi.interface.should be_a(Interface)
       end
     end
   end

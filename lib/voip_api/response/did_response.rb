@@ -42,8 +42,6 @@ module VoipApi
             result[:voip_response][:response_code]    = response_result[:response_code]
             result[:voip_response][:response_message] = response_result[:response_message]
 
-            # TODO: check to see if the response_code is 100 (success)
-
             # See if we have DID data
             my_dids = response_result[:di_ds]
             if my_dids
@@ -51,8 +49,20 @@ module VoipApi
               result[:payload][:dids] ||= Models::DIDList.new
 
               if my_dids[:did].is_a?(Hash)
-                # Single DID Entry (Hash)
-                result[:payload][:dids].push(Models::DID.new(VoipApi::Mapping::VoipDID.new(my_dids[:did])))
+                if (action == :query_did)
+                  # Query DID returns a "a dummy record with a “no records found” status will be returned if no records are found"
+                  if (my_dids[:did][:status_code].to_i == 102420) || (my_dids[:did][:status] == "Could not find number")
+                    # No records found, so we're going to manually change this.
+                    result[:voip_response][:response_code]    = 102420
+                    result[:voip_response][:response_message] = "Could not find number"
+                  else
+                    # Single DID Entry (Hash)
+                    result[:payload][:dids].push(Models::DID.new(VoipApi::Mapping::VoipDID.new(my_dids[:did])))
+                  end
+                else
+                  # Single DID Entry (Hash)
+                  result[:payload][:dids].push(Models::DID.new(VoipApi::Mapping::VoipDID.new(my_dids[:did])))
+                end
               else
                 # Multiple DIDs (Array)
                 # Store the DIDs in the DIDList container

@@ -27,8 +27,8 @@ module VoipApi
         describe "#get_dids" do
           it "can get a list of the did_locators" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               state: 'UT',
               npa: '435',
               lata: nil,
@@ -53,7 +53,7 @@ module VoipApi
 
         describe "#query_did" do
           it "can query an existing DID" do
-            message = { did: '4353198001', login: VoipApi.login, secret: VoipApi.secret }
+            message = { did: '4353198001', login: VoipApi.account.login, secret: VoipApi.account.secret }
             fixture = File.read("spec/fixtures/did/query_did.xml")
 
             # set up an expectation
@@ -70,8 +70,8 @@ module VoipApi
         describe "#get_did_count" do
           it "can get the list of the did_counts" do
             message = {
-              login: VoipApi.login, 
-              secret: VoipApi.secret,
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret,
               state: 'UT',
               npa: '435',
               lata: nil,
@@ -97,7 +97,7 @@ module VoipApi
 
         describe "#audit_dids" do
           it "can return a collection of all the DIDs for the account" do
-            message = { login: VoipApi.login, secret: VoipApi.secret }
+            message = { login: VoipApi.account.login, secret: VoipApi.account.secret }
             fixture = File.read("spec/fixtures/did/audit_dids.xml")
 
             # set up an expectation
@@ -115,8 +115,8 @@ module VoipApi
           it "can reserve a DID for up to 30 minutes" do
             message = { 
               did_params: {"DIDParam" => {tn: '4352154006', epg: 8674, cnam: "1", refId: "bada55"}},
-              login: VoipApi.login, 
-              secret: VoipApi.secret 
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret 
             }
             fixture = File.read("spec/fixtures/did/reserve_did.xml")
 
@@ -135,8 +135,8 @@ module VoipApi
           it "it can release an existing DID" do
             message = { 
               did_params: {"DIDParam" => {tn: '4352154006'}},
-              login: VoipApi.login, 
-              secret: VoipApi.secret 
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret 
             }
             fixture = File.read("spec/fixtures/did/release_did.xml")
 
@@ -155,8 +155,8 @@ module VoipApi
           it "can assign a DID to an endpoint group" do
             message = { 
               did_params: {"DIDParam" => {tn: '4352154006', epg: 8674}},
-              login: VoipApi.login, 
-              secret: VoipApi.secret 
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret 
             }
             fixture = File.read("spec/fixtures/did/assign_did.xml")
 
@@ -175,8 +175,8 @@ module VoipApi
           it "can configure an existing DID" do
             message = { 
               did_params: {"DIDParam" => {tn: '4352154006', epg: 8675}},
-              login: VoipApi.login, 
-              secret: VoipApi.secret 
+              login: VoipApi.account.login, 
+              secret: VoipApi.account.secret 
             }
             fixture = File.read("spec/fixtures/did/config_did.xml")
 

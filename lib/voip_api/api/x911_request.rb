@@ -247,6 +247,12 @@ module VoipApi
         self
       end
 
+      # This method removes the alert contact information from the DID.
+      def remove_911_alert(tn, email)
+        # :remove911_alert
+        raise NotImplementedError
+      end
+
       # Parsing and Chaining Operations
 
       # Returns a DIDList containing all the DID911s
