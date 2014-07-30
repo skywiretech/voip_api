@@ -5,7 +5,7 @@ VOIP API is a Ruby gem for communicating with the VOIP Innovations API.
 ### Installation
 
 ```ruby
-gem 'voip_api', git: 'git@github.com:mark-d-holmberg/voip_api.git'
+gem 'voip_api', git: 'https://github.com/PhoenixfireDevelopment/voip_api.git'
 ```
 
 ### Configuration
