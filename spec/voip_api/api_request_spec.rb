@@ -26,6 +26,10 @@ module VoipApi
         ApiRequest::PORT_REQUEST_ACTIONS.should match_array([:get_port_details, :is_portable])
       end
 
+      it "knows the constant CNAM_REQUEST_ACTIONS" do
+        ApiRequest::CNAM_REQUEST_ACTIONS.should match_array([:get_cnam_display, :update_cnam_display, :remove_cnam])
+      end
+
       it "knows the constant DID_REQUEST_ACTIONS" do
         ApiRequest::DID_REQUEST_ACTIONS.should match_array(
           [
@@ -55,6 +59,11 @@ module VoipApi
         # X911
         ApiRequest::X911_REQUEST_ACTIONS.each do |action|
           ApiRequest.delegated_klass(action).should eq(VoipApi::API::X911Request)
+        end
+
+        # X911
+        ApiRequest::CNAM_REQUEST_ACTIONS.each do |action|
+          ApiRequest.delegated_klass(action).should eq(VoipApi::API::CNAMRequest)
         end
       end
     end

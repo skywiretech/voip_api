@@ -2,7 +2,7 @@ module VoipApi
 
   # A helpful namespace
   module API
-    
+
     # Represents the base class to be inherited from for generating different
     # types of API Requests. This base class should never be instantiated!
     # @attr [Hash] arguments The arguments supplied for the API request
@@ -47,6 +47,13 @@ module VoipApi
         :reserve_did,
       ]
 
+      # What API Requests can the CNAMRequest handle?
+      CNAM_REQUEST_ACTIONS = [
+        :get_cnam_display,
+        :update_cnam_display,
+        :remove_cnam,
+      ]
+
       # This should be defined in the child
       # @!visibility private
       def self.sandbox_soap_action_keys
@@ -67,6 +74,8 @@ module VoipApi
           PortRequest
         elsif DID_REQUEST_ACTIONS.include?(action)
           DIDRequest
+        elsif CNAM_REQUEST_ACTIONS.include?(action)
+          CNAMRequest
         else
           nil
         end
@@ -81,7 +90,7 @@ module VoipApi
           parsed_response[:voip_response]
         end
       end
-      
+
       # Returns the VOIP Innovations response code returned from their API
       def voip_response_code
         voip_response(:response_code)
