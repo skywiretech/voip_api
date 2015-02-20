@@ -56,12 +56,19 @@ module VoipApi
       # This method configures the endpoint group and cnam for DIDs which are assigned to your account.
       # @param telephone_number [String] The telephone_number to configure
       # @param endpoint_group_id [String] The endpoint_group_id to configure
-      def config_did(telephone_number, endpoint_group_id)
+      # @param [Hash] did_params An optional hash for the CNAM and ref_id
+      # @option did_params [String] :cnam (default_value) The CNAM for inbound calls (1 or 0)
+      # @option did_params [String] :ref_id (default_value) The reference_id
+      def config_did(telephone_number, endpoint_group_id, did_params={})
         raise ArgumentError unless (telephone_number && telephone_number.is_a?(String))
         raise ArgumentError unless (endpoint_group_id && endpoint_group_id.is_a?(Integer))
+        cnam = did_params[:cnam]
+        ref_id = did_params[:ref_id]
         did_param = VoipApi::Models::DIDParam.new(VoipApi::Mapping::VoipDIDParam.new({
           tn: telephone_number,
           epg: endpoint_group_id,
+          cnam: cnam,
+          ref_id: ref_id,
         }))
         self.arguments = {did_params: {"DIDParam" => did_param.to_hash}}
         self.action = :config_did
@@ -69,8 +76,8 @@ module VoipApi
         self
       end
 
-      # This method allows the user to search the inventory of available DIDs by one or more criteria, and returns the number of DIDs 
-      # available at each rate center per tier. At least one search criteria must be passed. Pass an empty String or NULL for criteria 
+      # This method allows the user to search the inventory of available DIDs by one or more criteria, and returns the number of DIDs
+      # available at each rate center per tier. At least one search criteria must be passed. Pass an empty String or NULL for criteria
       # not included in your search.
       # @param [Hash] my_params the options to create a message with.
       # @option my_params [String] :state The state
@@ -82,7 +89,7 @@ module VoipApi
       # @option my_params [String] :t_38 Whether to search for T38 capable numbers
       # @option my_params [String] :cnam The CNAM
       # @option my_params [String] :orderby The field to order the results by
-      # @note orderby - Field to order results by. Default: “state” Options: “rc” for Rate center, 
+      # @note orderby - Field to order results by. Default: “state” Options: “rc” for Rate center,
       # “lata” for lata id, “state” for state abbrev, “tier” for the tier of the numbers. Options are not case sensitive.
       def get_did_count(my_params={})
         raise ArgumentError, 'Argument is not a Hash!' unless my_params.is_a?(Hash)
@@ -108,8 +115,8 @@ module VoipApi
         end
       end
 
-      # This method allows the user to search the inventory of available DIDs using one or more search criteria, and returns all DIDs that 
-      # meet the desired criteria. At least one search criteria must be passed. Pass an empty String or NULL for criteria not included in 
+      # This method allows the user to search the inventory of available DIDs using one or more search criteria, and returns all DIDs that
+      # meet the desired criteria. At least one search criteria must be passed. Pass an empty String or NULL for criteria not included in
       # the search parameter.
       # @param [Hash] my_params the options to create a message with.
       # @option my_params [String] :state The state
@@ -144,8 +151,8 @@ module VoipApi
         end
       end
 
-      # This method returns key information regarding the DID being queried. If the DID is owned by the client, the function will 
-      # return various parameters pertaining to the DID. If the DID is available to purchase or not available, the function will 
+      # This method returns key information regarding the DID being queried. If the DID is owned by the client, the function will
+      # return various parameters pertaining to the DID. If the DID is available to purchase or not available, the function will
       # return such information instead.
       # @param did [String] The telephone number to query
       def query_did(did)
@@ -172,7 +179,7 @@ module VoipApi
         self
       end
 
-      # This method will reserve an available DID for a maximum of 30 minutes. If the reserved DID is 
+      # This method will reserve an available DID for a maximum of 30 minutes. If the reserved DID is
       # not assigned before the time expires, it will be released back into the inventory.
       # @param telephone_number [String] The telephone_number to configure
       # @param endpoint_group_id [String] The endpoint_group_id to configure
